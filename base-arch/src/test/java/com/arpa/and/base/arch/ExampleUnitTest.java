@@ -1,4 +1,4 @@
-package com.arpa.and.base.arch;
+package com.arpa.and.arch;
 
 import org.junit.Test;
 
