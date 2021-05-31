@@ -1,0 +1,72 @@
+plugins {
+    id 'com.android.application'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion build_versions.compileSdk
+    buildToolsVersion build_versions.buildTools
+
+    defaultConfig {
+        applicationId "com.arpa.and.basearch"
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def createTime = new Date().format("YYMMddHHmm", TimeZone.getTimeZone("GMT+08:00"))
+            def name = output.outputFile.name, ext = "";
+            def dotIndex = name.indexOf(".")
+            if (dotIndex != -1) {
+                ext = name.substring(dotIndex);
+            }
+
+            outputFileName = "BaseArch_v" + defaultConfig.versionName + "_" + createTime + "_" + buildType.name + ext;
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    // test
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test.ext:junit:1.1.2"
+    androidTestImplementation "androidx.test:core:1.3.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.3.0"
+
+    // 本地
+    // implementation project(path: ':base-arch')
+    implementation 'com.arpa.base:arpa-base-arch:1.0.8-SNAPSHOT'
+
+    // 官方
+    implementation "androidx.appcompat:appcompat:1.3.0"
+    implementation "com.google.android.material:material:1.3.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+
+    // hilt
+    api "com.google.dagger:hilt-android:2.35"
+    annotationProcessor "com.google.dagger:hilt-android-compiler:2.35"
+
+    // 功能
+    implementation "com.orhanobut:logger:2.2.0"
+
+    // 性能
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.7"
+
+    // ui
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+}
