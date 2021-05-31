@@ -2,8 +2,8 @@ package com.arpa.and.basearch.base;
 
 import android.content.Context;
 
-import com.arpa.and.base.arch.config.FrameConfigModule;
-import com.arpa.and.base.arch.di.module.ConfigModule;
+import com.arpa.and.arch.config.FrameConfigModule;
+import com.arpa.and.arch.di.module.ConfigModule;
 import com.arpa.and.basearch.net.interceptor.HeaderInterceptor;
 
 /**

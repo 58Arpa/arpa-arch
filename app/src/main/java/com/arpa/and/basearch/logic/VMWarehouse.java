@@ -2,8 +2,8 @@ package com.arpa.and.basearch.logic;
 
 import android.app.Application;
 
-import com.arpa.and.base.arch.base.BaseModel;
-import com.arpa.and.base.arch.base.livedata.StatusEvent;
+import com.arpa.and.arch.base.BaseModel;
+import com.arpa.and.arch.base.livedata.StatusEvent;
 import com.arpa.and.basearch.base.WrapDataViewModel;
 import com.arpa.and.basearch.bean.res.ResWarehouse;
 import com.arpa.and.basearch.net.callback.ResultCallback;

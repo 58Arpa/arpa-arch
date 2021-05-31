@@ -1,6 +1,6 @@
 package com.arpa.and.basearch.net.callback;
 
-import com.arpa.and.base.arch.http.callback.ApiCallback;
+import com.arpa.and.arch.http.callback.ApiCallback;
 import com.arpa.and.basearch.bean.base.Result;
 import com.arpa.and.basearch.net.exception.ErrorCode;
 import com.arpa.and.basearch.net.exception.ErrorHandler;

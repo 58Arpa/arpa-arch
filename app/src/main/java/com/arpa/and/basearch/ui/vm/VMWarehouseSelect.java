@@ -2,7 +2,7 @@ package com.arpa.and.basearch.ui.vm;
 
 import android.app.Application;
 
-import com.arpa.and.base.arch.base.BaseModel;
+import com.arpa.and.arch.base.BaseModel;
 import com.arpa.and.basearch.BR;
 import com.arpa.and.basearch.R;
 import com.arpa.and.basearch.base.WrapDataViewModel;

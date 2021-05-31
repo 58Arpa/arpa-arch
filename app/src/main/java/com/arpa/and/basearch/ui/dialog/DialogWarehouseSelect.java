@@ -2,7 +2,7 @@ package com.arpa.and.basearch.ui.dialog;
 
 import android.os.Bundle;
 
-import com.arpa.and.base.arch.base.BaseDialogFragment;
+import com.arpa.and.arch.base.BaseDialogFragment;
 import com.arpa.and.basearch.R;
 import com.arpa.and.basearch.bean.res.ResWarehouse;
 import com.arpa.and.basearch.databinding.DialogWarehouseSelectBinding;

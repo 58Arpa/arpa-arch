@@ -2,8 +2,8 @@ package com.arpa.and.basearch.base;
 
 import android.app.Application;
 
-import com.arpa.and.base.arch.base.BaseModel;
-import com.arpa.and.base.arch.base.DataViewModel;
+import com.arpa.and.arch.base.BaseModel;
+import com.arpa.and.arch.base.DataViewModel;
 import com.arpa.and.basearch.net.ApiService;
 import com.arpa.and.basearch.utils.SPUtils;
 

@@ -1,7 +1,7 @@
 package com.arpa.and.basearch.bean.base;
 
 
-import com.arpa.and.base.arch.util.GsonUtils;
+import com.arpa.and.arch.util.GsonUtils;
 
 import java.util.Map;
 
