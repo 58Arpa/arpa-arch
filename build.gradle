@@ -22,28 +22,6 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url "https://jitpack.io" }
-
-        allprojects {
-            repositories {
-                maven {
-                    url 'https://maven.aliyun.com/repository/public'
-                }
-                maven {
-                    credentials {
-                        username '6030515c8e57bd6e42fdcae7'
-                        password 'Q4n7NKSyBU-U'
-                    }
-                    url 'https://packages.aliyun.com/maven/repository/2076880-release-CiCLka/'
-                }
-                maven {
-                    credentials {
-                        username '6030515c8e57bd6e42fdcae7'
-                        password 'Q4n7NKSyBU-U'
-                    }
-                    url 'https://packages.aliyun.com/maven/repository/2076880-snapshot-Te3h3q/'
-                }
-            }
-        }
     }
 }
 
