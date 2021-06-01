@@ -4,7 +4,6 @@ package com.arpa.and.arch.di.module;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import com.arpa.and.arch.BuildConfig;
 import com.arpa.and.arch.config.AppliesOptions;
 import com.arpa.and.arch.http.InterceptorConfig;
 import com.arpa.and.arch.http.interceptor.logging.Level;
@@ -78,7 +77,7 @@ public class HttpModule {
         if (config.isAddLog()) {
             builder.addInterceptor(new LoggingInterceptor
                     .Builder()//构建者模式
-                    .loggable(BuildConfig.DEBUG) //是否开启日志打印
+                    .loggable(true) //是否开启日志打印
                     .setLevel(Level.BASIC) //打印的等级
                     .log(Platform.INFO) // 打印类型
                     .request("Net-Request") // request的Tag
