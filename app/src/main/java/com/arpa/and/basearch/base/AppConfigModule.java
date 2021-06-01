@@ -18,12 +18,6 @@ import com.arpa.and.basearch.net.interceptor.HeaderInterceptor;
 public class AppConfigModule extends FrameConfigModule {
     @Override
     public void applyOptions(Context context, ConfigModule.Builder builder) {
-        builder.okHttpClientOptions(okHttpBuilder ->
-                okHttpBuilder.addInterceptor(new HeaderInterceptor())
-        )./*gsonOptions(gsonBuilder ->
-                gsonBuilder.registerTypeAdapterFactory(ObjectDeserializerDoubleAsIntFix.FACTORY)
-        ).*/interceptorConfigOptions(interceptorBuilder ->
-                interceptorBuilder.addGsonConverterFactory(true)
-        );
+        builder.okHttpClientOptions(okHttpBuilder ->okHttpBuilder.addInterceptor(new HeaderInterceptor()));
     }
 }

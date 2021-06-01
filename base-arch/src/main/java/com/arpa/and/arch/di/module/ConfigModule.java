@@ -1,6 +1,5 @@
 package com.arpa.and.arch.di.module;
 
-
 import android.content.Context;
 
 import com.arpa.and.arch.config.AppliesOptions;
@@ -26,7 +25,6 @@ import okhttp3.HttpUrl;
 @InstallIn(SingletonComponent.class)
 @Module
 public class ConfigModule {
-
 
     @Singleton
     @Provides
@@ -147,8 +145,5 @@ public class ConfigModule {
             this.roomDatabaseOptions = roomDatabaseOptions;
             return this;
         }
-
     }
-
-
 }

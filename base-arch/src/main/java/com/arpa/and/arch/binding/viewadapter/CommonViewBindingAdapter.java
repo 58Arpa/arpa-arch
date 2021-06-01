@@ -12,10 +12,6 @@ import androidx.databinding.BindingAdapter;
  * author: 李一方(<a href="mailto:leergo@dingtalk.com">leergo@dingtalk.com</a>)<br/>
  * version: 1.0.0<br/>
  * since: 2021-04-26 9:25 AM
- *
- * <p>
- * 内容描述区域
- * </p>
  */
 public class CommonViewBindingAdapter {
     private static final int INTERVAL = 700;

@@ -80,12 +80,6 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
         dismissDialog(mProgressDialog);
     }
 
-    protected void dismissDialog(Dialog dialog) {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
-    }
-
     /**
      * 初始化ContentView，{@link #setContentView(int)} }
      */
@@ -241,8 +235,6 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
         viewModel.getStatusEvent().observe(this, observer);
     }
 
-    //---------------------------------------
-
     /**
      * @deprecated 请使用 {@link #obtainViewModel(Class)}
      */
@@ -250,6 +242,8 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
     public <T extends ViewModel> T getViewModel(@NonNull Class<T> modelClass) {
         return obtainViewModel(modelClass);
     }
+
+    //---------------------------------------
 
     /**
      * 通过 {@link #createViewModelProvider(ViewModelStoreOwner)}获得 ViewModel
@@ -376,6 +370,12 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
 
     protected void dismissProgressDialog() {
         dismissDialog(mProgressDialog);
+    }
+
+    protected void dismissDialog(Dialog dialog) {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     protected void showProgressDialog(View v) {
