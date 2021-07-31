@@ -24,6 +24,9 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,8 +45,13 @@ import androidx.lifecycle.ViewModelStoreOwner;
  * 继承使用了BaseActivity或其子类，你需要参照如下方式添加@AndroidEntryPoint注解
  */
 public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDataBinding> extends AppCompatActivity implements IView<VM>, BaseNavigator {
-
     protected static final float DEFAULT_WIDTH_RATIO = 0.85f;
+
+    /**
+     * start activity for result 的处理
+     */
+    private final ActivityResultLauncher<Intent> startActivityResult =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> onStartActivityResult(result));
     /**
      * 后续版本 {@link #viewModel}可能会私有化
      */
@@ -55,6 +63,9 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
     private Dialog mDialog;
     private final View.OnClickListener mOnDialogCancelClick = v -> dismissDialog();
     private Dialog mProgressDialog;
+
+    protected void onStartActivityResult(ActivityResult result) {
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +89,12 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
         }
 
         dismissDialog(mProgressDialog);
+    }
+
+    protected void dismissDialog(Dialog dialog) {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
     /**
@@ -183,7 +200,11 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
             Class<?> clz = (Class<?>) params.get(ParameterField.CLASS);
             Bundle bundle = (Bundle) params.get(ParameterField.BUNDLE);
             Integer flags = (Integer) params.get(ParameterField.FLAGS);
-            startActivity(clz, bundle, flags);
+            if (params.containsKey(ParameterField.REQUEST_CODE)) {
+                startActivityResult.launch(newIntent(clz, bundle, flags));
+            } else {
+                startActivity(clz, bundle, flags);
+            }
         });
     }
 
@@ -235,6 +256,8 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
         viewModel.getStatusEvent().observe(this, observer);
     }
 
+    //---------------------------------------
+
     /**
      * @deprecated 请使用 {@link #obtainViewModel(Class)}
      */
@@ -242,8 +265,6 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
     public <T extends ViewModel> T getViewModel(@NonNull Class<T> modelClass) {
         return obtainViewModel(modelClass);
     }
-
-    //---------------------------------------
 
     /**
      * 通过 {@link #createViewModelProvider(ViewModelStoreOwner)}获得 ViewModel
@@ -370,12 +391,6 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
 
     protected void dismissProgressDialog() {
         dismissDialog(mProgressDialog);
-    }
-
-    protected void dismissDialog(Dialog dialog) {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
     }
 
     protected void showProgressDialog(View v) {

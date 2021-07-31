@@ -15,5 +15,6 @@ public interface Const {
         String BUNDLE = "BUNDLE";
         String FLAGS = "FLAGS";
         String CANONICAL_NAME = "CANONICAL_NAME";
+        String REQUEST_CODE = "REQUEST_CODE";
     }
 }

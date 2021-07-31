@@ -381,6 +381,10 @@ public class BaseViewModel <M extends BaseModel> extends AndroidViewModel implem
     }
 
     public void startActivity(Class<?> clz, Bundle bundle, Integer flags) {
+        startActivity(clz, bundle, flags, null);
+    }
+
+    public void startActivity(Class<?> clz, Bundle bundle, Integer flags, Integer requestCode) {
         Map<String, Object> params = new HashMap<>();
         params.put(ParameterField.CLASS, clz);
         if (null != flags && flags != -1) {
@@ -389,7 +393,14 @@ public class BaseViewModel <M extends BaseModel> extends AndroidViewModel implem
         if (bundle != null) {
             params.put(ParameterField.BUNDLE, bundle);
         }
+        if (requestCode != null) {
+            params.put(ParameterField.REQUEST_CODE, requestCode);
+        }
         startActivityEvent.postValue(params);
+    }
+
+    public void startActivityForResult(Class<?> clz, Bundle bundle, Integer requestCode) {
+        startActivity(clz, bundle, null, requestCode);
     }
 
     /**
