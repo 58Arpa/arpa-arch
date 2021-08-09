@@ -19,6 +19,7 @@ import com.arpa.and.arch.R;
 import com.arpa.and.arch.base.livedata.MessageEvent;
 import com.arpa.and.arch.base.livedata.StatusEvent;
 import com.arpa.and.arch.util.Const;
+import com.arpa.and.arch.util.Const.ParameterField;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -138,9 +139,14 @@ public abstract class BaseFragment <VM extends BaseViewModel, VDB extends ViewDa
      */
     protected void registerStartActivityEvent() {
         viewModel.getStartActivityEvent().observe(this, (Observer<Map<String, Object>>) params -> {
-            Class<?> clz = (Class<?>) params.get(Const.ParameterField.CLASS);
-            Bundle bundle = (Bundle) params.get(Const.ParameterField.BUNDLE);
-            Integer flags = (Integer) params.get(Const.ParameterField.FLAGS);
+            Class<?> clz = (Class<?>) params.get(ParameterField.CLASS);
+            Bundle bundle = (Bundle) params.get(ParameterField.BUNDLE);
+            Integer flags = (Integer) params.get(ParameterField.FLAGS);
+            if (params.containsKey(ParameterField.REQUEST_CODE)) {
+                startActivityResult.launch(newIntent(clz, bundle, flags));
+            } else {
+                startActivity(clz, bundle, flags);
+            }
             startActivity(clz, bundle, flags);
         });
     }
