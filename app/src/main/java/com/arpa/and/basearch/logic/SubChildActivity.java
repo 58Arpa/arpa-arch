@@ -1,13 +1,10 @@
 package com.arpa.and.basearch.logic;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.arpa.and.basearch.R;
 import com.arpa.and.basearch.base.WrapBaseActivity;
 import com.arpa.and.basearch.databinding.ActivitySubChildBinding;
-
-import java.util.Random;
 
 import androidx.annotation.Nullable;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -28,11 +25,11 @@ public class SubChildActivity extends WrapBaseActivity<VMSubChild, ActivitySubCh
     public void initData(@Nullable Bundle savedInstanceState) {
         super.initData(savedInstanceState);
         viewBind.setViewModel(viewModel);
-        viewBind.btnFinish.setOnClickListener(v -> {
-            Intent data = new Intent();
-            data.putExtra("test", String.valueOf(new Random().nextGaussian()));
-            setResult(RESULT_OK, data);
-            finish();
-        });
+//        viewBind.btnFinish.setOnClickListener(v -> {
+//            Intent data = new Intent();
+//            data.putExtra("test", String.valueOf(new Random().nextGaussian()));
+//            setResult(RESULT_OK, data);
+//            finish();
+//        });
     }
 }

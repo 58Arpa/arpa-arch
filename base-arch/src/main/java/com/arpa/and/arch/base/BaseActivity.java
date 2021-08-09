@@ -50,7 +50,7 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
     /**
      * start activity for result 的处理
      */
-    private final ActivityResultLauncher<Intent> startActivityResult =
+    protected final ActivityResultLauncher<Intent> startActivityResult =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> onStartActivityResult(result));
     /**
      * 后续版本 {@link #viewModel}可能会私有化
@@ -212,7 +212,10 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
      * 注册界面跳转事件
      */
     protected void registerFinishEvent() {
-        viewModel.getFinishEvent().observe(this, o -> {
+        viewModel.getFinishEvent().observe(this, data -> {
+            if (null != data) {
+                setResult(RESULT_OK, (Intent) data);
+            }
             finish();
         });
     }

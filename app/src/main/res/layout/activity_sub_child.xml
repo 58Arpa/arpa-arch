@@ -20,6 +20,7 @@
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="Result 结束"
+            android:onClick="@{()->viewModel.finishResult()}"
             android:textColor="@color/white" />
     </RelativeLayout>
 </layout>

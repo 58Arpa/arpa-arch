@@ -24,6 +24,9 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -40,6 +43,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * 继承使用了BaseFragment或其子类，你需要参照如下方式添加@AndroidEntryPoint注解
@@ -47,6 +52,11 @@ import androidx.lifecycle.ViewModelStoreOwner;
 public abstract class BaseFragment <VM extends BaseViewModel, VDB extends ViewDataBinding> extends Fragment implements IView<VM>, BaseNavigator {
 
     protected static final float DEFAULT_WIDTH_RATIO = 0.85f;
+    /**
+     * start activity for result 的处理
+     */
+    protected final ActivityResultLauncher<Intent> startActivityResult =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> onStartActivityResult(result));
     /**
      * 请通过 {@link #getViewModel()}获取，后续版本 {@link #viewModel}可能会私有化
      */
@@ -62,6 +72,9 @@ public abstract class BaseFragment <VM extends BaseViewModel, VDB extends ViewDa
     private Dialog mDialog;
     private Dialog mProgressDialog;
     private View.OnClickListener mOnDialogCancelClick = v -> dismissDialog();
+
+    protected void onStartActivityResult(ActivityResult result) {
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -147,7 +160,10 @@ public abstract class BaseFragment <VM extends BaseViewModel, VDB extends ViewDa
      * 注册界面跳转事件
      */
     protected void registerFinishEvent() {
-        viewModel.getFinishEvent().observe(this, o -> {
+        viewModel.getFinishEvent().observe(this, data -> {
+            if (null != data) {
+                requireActivity().setResult(RESULT_OK, (Intent) data);
+            }
             finish();
         });
     }
@@ -379,16 +395,16 @@ public abstract class BaseFragment <VM extends BaseViewModel, VDB extends ViewDa
         startActivity(intent, optionsCompat);
     }
 
-    protected void startActivityForResult(Class<?> cls, int requestCode) {
-        startActivityForResult(newIntent(cls), requestCode);
+    protected void startActivityForResult(Class<?> cls) {
+        startActivityForResult(cls, null);
     }
 
-    protected void startActivityForResult(Class<?> cls, int requestCode, @Nullable ActivityOptionsCompat optionsCompat) {
+    protected void startActivityForResult(Class<?> cls, @Nullable ActivityOptionsCompat optionsCompat) {
         Intent intent = newIntent(cls);
         if (optionsCompat != null) {
-            startActivityForResult(intent, requestCode, optionsCompat.toBundle());
+            startActivityResult.launch(intent, optionsCompat);
         } else {
-            startActivityForResult(intent, requestCode);
+            startActivityResult.launch(intent);
         }
     }
 

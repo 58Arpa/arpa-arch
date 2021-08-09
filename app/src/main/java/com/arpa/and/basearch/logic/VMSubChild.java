@@ -1,9 +1,12 @@
 package com.arpa.and.basearch.logic;
 
 import android.app.Application;
+import android.os.Bundle;
 
 import com.arpa.and.arch.base.BaseModel;
 import com.arpa.and.basearch.base.WrapDataViewModel;
+
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -21,5 +24,11 @@ public class VMSubChild extends WrapDataViewModel {
     @Inject
     public VMSubChild(@NonNull Application application, BaseModel model) {
         super(application, model);
+    }
+
+    public void finishResult() {
+        Bundle bundle = new Bundle();
+        bundle.putString("test", String.valueOf(new Random().nextGaussian()));
+        finishResult(bundle);
     }
 }

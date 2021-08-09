@@ -1,6 +1,7 @@
 package com.arpa.and.arch.base;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 
@@ -45,7 +46,7 @@ public class BaseViewModel <M extends BaseModel> extends AndroidViewModel implem
      * 界面跳转事件
      */
     private final SingleLiveEvent<Map<String, Object>> startActivityEvent = new SingleLiveEvent<>();
-    private final SingleLiveEvent<Void> finishEvent = new SingleLiveEvent<>();
+    private final SingleLiveEvent<Intent> finishEvent = new SingleLiveEvent<>();
     /**
      * 请通过 {@link #getModel()} 获取，后续版本 {@link #model}可能会私有化
      */
@@ -145,7 +146,7 @@ public class BaseViewModel <M extends BaseModel> extends AndroidViewModel implem
      *
      * @return {@link #startActivityEvent}
      */
-    public SingleLiveEvent<Void> getFinishEvent() {
+    public SingleLiveEvent<Intent> getFinishEvent() {
         return finishEvent;
     }
 
@@ -432,5 +433,13 @@ public class BaseViewModel <M extends BaseModel> extends AndroidViewModel implem
      */
     public void finish() {
         finishEvent.call();
+    }
+    /**
+     * 关闭界面 - 带返回值
+     */
+    public void finishResult(Bundle bundle) {
+        Intent intent = new Intent();
+        intent.putExtras(bundle);
+        finishEvent.setValue(intent);
     }
 }
