@@ -18,7 +18,6 @@ import android.widget.PopupWindow;
 import com.arpa.and.arch.R;
 import com.arpa.and.arch.base.livedata.MessageEvent;
 import com.arpa.and.arch.base.livedata.StatusEvent;
-import com.arpa.and.arch.util.Const;
 import com.arpa.and.arch.util.Const.ParameterField;
 
 import java.lang.reflect.ParameterizedType;
@@ -147,7 +146,6 @@ public abstract class BaseFragment <VM extends BaseViewModel, VDB extends ViewDa
             } else {
                 startActivity(clz, bundle, flags);
             }
-            startActivity(clz, bundle, flags);
         });
     }
 
