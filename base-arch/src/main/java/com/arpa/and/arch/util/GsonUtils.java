@@ -55,8 +55,12 @@ public class GsonUtils {
         }.getType());
     }
 
+    public String pojo2Str(Object object) {
+        return gson.toJson(object);
+    }
+
     private static class SingleHolder {
-        private static final GsonUtils ins = new GsonUtils();
+        protected static final GsonUtils ins = new GsonUtils();
     }
 }
 

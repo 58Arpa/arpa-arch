@@ -3,13 +3,13 @@ package com.arpa.and.arch.binding.viewadapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import com.arpa.and.arch.binding.adapter.SimpleFragmentStateAdapter;
+
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 /**
@@ -32,18 +32,7 @@ public class Pager2ViewBindingAdapter {
     @BindingAdapter({"fragments", "tab", "titles"})
     public static void setFragments(ViewPager2 viewPager, final List<? extends Fragment> fragments, TabLayout tab, List<String> titles) {
         if (null != fragments) {
-            viewPager.setAdapter(new FragmentStateAdapter((FragmentActivity) viewPager.getContext()) {
-                @NonNull
-                @Override
-                public Fragment createFragment(int position) {
-                    return fragments.get(position);
-                }
-
-                @Override
-                public int getItemCount() {
-                    return fragments.size();
-                }
-            });
+            viewPager.setAdapter(new SimpleFragmentStateAdapter((FragmentActivity) viewPager.getContext(), fragments));
             new TabLayoutMediator(tab, viewPager, (v, position) -> v.setText(titles.get(position))).attach();
         }
     }

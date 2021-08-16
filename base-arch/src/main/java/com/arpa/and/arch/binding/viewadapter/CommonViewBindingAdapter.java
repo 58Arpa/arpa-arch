@@ -3,8 +3,6 @@ package com.arpa.and.arch.binding.viewadapter;
 import android.os.SystemClock;
 import android.view.View;
 
-import com.arpa.and.arch.binding.command.BindingCommand;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 
@@ -53,18 +51,6 @@ public class CommonViewBindingAdapter {
             mHits[mHits.length - 1] = SystemClock.uptimeMillis();
             if (mHits[0] < (SystemClock.uptimeMillis() - INTERVAL)) {
                 clickListener.onClick(v);
-            }
-        });
-    }
-
-    /**
-     * view的焦点发生变化的事件绑定
-     */
-    @BindingAdapter({"onFocusChangeCommand"})
-    public static void onFocusChangeCommand(View view, final BindingCommand<Boolean> onFocusChangeCommand) {
-        view.setOnFocusChangeListener((v, hasFocus) -> {
-            if (onFocusChangeCommand != null) {
-                onFocusChangeCommand.execute(hasFocus);
             }
         });
     }
