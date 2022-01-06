@@ -17,16 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="UnusedAttribute">
-        <!--        <activity-->
-        <!--            android:name=".logic.LoginActivity"-->
-        <!--            android:exported="true">-->
-        <!--            <intent-filter>-->
-        <!--                <action android:name="android.intent.action.MAIN" />-->
-        <!--                -->
-        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--            </intent-filter>-->
-        <!--        </activity>-->
         <activity
+            android:name=".logic.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!--<activity
             android:name=".logic.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -36,7 +36,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name=".logic.SubChildActivity" />
+        <activity android:name=".logic.SubChildActivity" />-->
         
         <!-- App 全局配置 -->
         <meta-data
