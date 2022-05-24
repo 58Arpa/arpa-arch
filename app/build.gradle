@@ -57,8 +57,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
     // hilt
-    api 'com.google.dagger:hilt-android:2.40.5'
-    annotationProcessor 'com.google.dagger:hilt-android-compiler:2.40.5'
+    api 'com.google.dagger:hilt-android:2.41'
+    annotationProcessor 'com.google.dagger:hilt-android-compiler:2.41'
 
     // 功能
     implementation "com.orhanobut:logger:2.2.0"
