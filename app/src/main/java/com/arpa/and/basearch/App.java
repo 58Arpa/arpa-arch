@@ -1,21 +1,15 @@
 package com.arpa.and.basearch;
 
-import android.app.Application;
+import androidx.multidex.MultiDexApplication;
 
 import com.arpa.and.basearch.net.ApiService;
-import com.arpa.and.basearch.utils.Const;
 import com.arpa.and.basearch.utils.Utils;
 import com.king.retrofit.retrofithelper.RetrofitHelper;
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.FormatStrategy;
-import com.orhanobut.logger.Logger;
-import com.orhanobut.logger.PrettyFormatStrategy;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 
 import dagger.hilt.android.HiltAndroidApp;
-import timber.log.Timber;
 
 /**
  * author: 李一方(<a href="mailto:leergo@dingtalk.com">leergo@dingtalk.com</a>)<br/>
@@ -27,7 +21,7 @@ import timber.log.Timber;
  * </p>
  */
 @HiltAndroidApp
-public class App extends Application {
+public class App extends MultiDexApplication {
     static {
         //设置全局的Header构建器
         SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
@@ -48,28 +42,10 @@ public class App extends Application {
 
         Utils.init(this);
         setApiURL();
-        initLogger();
     }
 
     private void setApiURL() {
         RetrofitHelper.getInstance().setBaseUrl(ApiService.API.URL_WMS);
         // RetrofitHelper.getInstance().putDomain(API.URL_KEY, API.URL_AUTH);
-    }
-
-    private void initLogger() {
-        //初始化日志打印
-        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                .methodOffset(5)
-                .tag(Const.LOG_TAG)
-                .build();
-        Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
-        Timber.plant(new Timber.DebugTree() {
-            @Override
-            protected void log(int priority, String tag, String message, Throwable t) {
-                if (BuildConfig.DEBUG) {
-                    Logger.log(priority, tag, message, t);
-                }
-            }
-        });
     }
 }

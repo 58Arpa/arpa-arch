@@ -47,7 +47,7 @@ afterEvaluate {
     }
 }
 
-task generateSourcesJar(type: Jar) {
+tasks.register('generateSourcesJar', Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier "sources"
 }

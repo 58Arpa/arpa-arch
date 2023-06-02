@@ -2,13 +2,14 @@ package com.arpa.and.basearch.base;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.ViewDataBinding;
+
+import com.arpa.and.arch.base.BaseActivity;
 import com.arpa.and.arch.base.BaseViewModel;
 import com.arpa.and.arch.base.livedata.StatusEvent;
 import com.arpa.and.basearch.R;
 import com.arpa.and.basearch.utils.ToastUtils;
-
-import androidx.annotation.Nullable;
-import androidx.databinding.ViewDataBinding;
 
 /**
  * author: 李一方(<a href="mailto:leergo@dingtalk.com">leergo@dingtalk.com</a>)<br/>
@@ -20,7 +21,7 @@ import androidx.databinding.ViewDataBinding;
  * </p>
  */
 public abstract class WrapBaseActivity <VM extends BaseViewModel, VDB extends ViewDataBinding>
-        extends com.arpa.and.arch.base.BaseActivity<VM, VDB> {
+        extends BaseActivity<VM, VDB> {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         registerMessageEvent(ToastUtils::showShort);
