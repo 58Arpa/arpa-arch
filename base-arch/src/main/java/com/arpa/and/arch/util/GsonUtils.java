@@ -7,6 +7,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 
+import com.arpa.and.arch.util.gson.IgnoreFieldExclusionStrategy;
+import com.arpa.and.arch.util.gson.MapDeserializerDoubleAsIntFix;
+
 import java.util.Map;
 
 /**
@@ -26,8 +29,7 @@ public class GsonUtils {
      */
     private GsonUtils() {
         gson = new GsonBuilder()
-                .registerTypeAdapter(new TypeToken<Map<String, Object>>() {
-                }.getType(), new MapDeserializerDoubleAsIntFix())
+                .registerTypeAdapter(new TypeToken<Map<String, Object>>() {}.getType(), new MapDeserializerDoubleAsIntFix())
                 .addSerializationExclusionStrategy(new ExclusionStrategy() {
                     @Override
                     public boolean shouldSkipField(FieldAttributes f) {
@@ -40,6 +42,7 @@ public class GsonUtils {
                         return false;
                     }
                 })
+                .setExclusionStrategies(new IgnoreFieldExclusionStrategy())
                 .create();
     }
 
@@ -63,4 +66,3 @@ public class GsonUtils {
         protected static final GsonUtils ins = new GsonUtils();
     }
 }
-

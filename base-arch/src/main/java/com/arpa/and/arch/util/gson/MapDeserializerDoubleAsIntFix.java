@@ -1,4 +1,4 @@
-package com.arpa.and.arch.util;
+package com.arpa.and.arch.util.gson;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
