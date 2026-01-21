@@ -389,6 +389,7 @@ public abstract class BaseActivity <VM extends BaseViewModel, VDB extends ViewDa
         mProgressDialog = BaseProgressDialog.newInstance(getContext());
         mProgressDialog.setContentView(v);
         mProgressDialog.setCanceledOnTouchOutside(isCancel);
+        mProgressDialog.setCancelable(isCancel);
         mProgressDialog.show();
     }
 
